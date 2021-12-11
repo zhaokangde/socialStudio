@@ -1,6 +1,10 @@
 {
 	"pages": [
 		{
+			"path": "pages/TUI-Login/login2",
+			"style": {}
+		},
+		{
 			"path": "pages/TUI-Login/login",
 			"style": {}
 		},
@@ -72,6 +76,17 @@
 				"text": "首页",
 				"iconPath": "/static/static/images/homepage-normal.png",
 				"selectedIconPath": "/static/static/images/homepage-hover.png"
+			},
+			{
+				"pagePath": "pages/TUI-Conversation/conversation/conversation",
+				"iconPath": "/static/static/images/homepage-normal.png",
+				"text": "消息列表首页",
+				"style": {
+					"navigationBarTitleText": "消息列表",
+					"navigationBarBackgroundColor": "#006EFF",
+					"backgroundColor": "#FFFFFF",
+					"navigationBarTextStyle": "white"
+				}
 			},
 			{
 				"pagePath": "pages/TUI-User-Center/mine/mine",

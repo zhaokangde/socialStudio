@@ -123,7 +123,8 @@ export default {
     handleOnTap(event) {
       this.setData({
         showSelectTag: false
-      }, () => {
+      })
+    
         switch (event.currentTarget.dataset.name) {
           case '发起会话':
             this.$createConversation();
@@ -139,7 +140,7 @@ export default {
           default:
             break;
         }
-      });
+  
     },
 
     goHomePage() {

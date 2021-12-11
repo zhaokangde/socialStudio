@@ -10,23 +10,11 @@
       </view>
     </view>
     <view class="box">
-      <view class="list">
-        <view class="list-item">
-          <label class="list-item-label">用户ID</label>
-		  <input class="input" type="text" placeholder="请输入用户名" @input='bindUserIDInput' placeholder-style="color:#BBBBBB;"/>
-        </view>
-      </view>
-      <view class="private-protocol-box">
-          <view class="private-protocol-switch" @tap="onAgreePrivateProtocol">
-            <image v-if="privateAgree" src="/static/static/images/selected.png" lazy-load="true"></image>
-            <image v-else src="/static/static/images/select.png" lazy-load="true"></image>
-          </view>
-          <view class="text-box"><text>我已阅读并同意</text><text class="link" @tap="linkToPrivacyTreaty">《隐私条例》</text><text>和</text><text class="link" @tap="linkToUserAgreement">《用户协议》</text>
-          </view>
-      </view>
       <view class="login">
-            <button class="loginBtn" :disabled="!privateAgree" @tap="login">登录</button>
+          <button type="default" open-type="getUserInfo" @getuserinfo="getUserInfo">一键登录微信小程序</button>
+            <!-- <button class="loginBtn" :disabled="!privateAgree" @tap="login">登录</button> -->
       </view>
+
     </view>
   </view>
 </view>
@@ -101,6 +89,23 @@ export default {
   },
 
   methods: {
+    getUserInfo(res) {
+           console.log(res);
+           uni.login({
+               provider: 'weixin',
+               success: function(loginRes) {
+                   console.log(loginRes);
+                   // 获取用户信息
+                   uni.getUserInfo({
+                       provider: 'weixin',
+                       success: function(infoRes) {
+                           console.log('用户昵称为：' + infoRes.userInfo.nickName);
+                       }
+                   });
+               }
+           });
+        
+       },
     loginWithToken() {
       uni.switchTab({
         url: '../TUI-Index/index'
