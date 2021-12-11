@@ -13,7 +13,9 @@
       <view class="login">
           <button type="default" open-type="getUserInfo" @getuserinfo="getUserInfo">一键登录微信小程序</button>
             <!-- <button class="loginBtn" :disabled="!privateAgree" @tap="login">登录</button> -->
+            <button open-type="getPhoneNumber" @getphonenumber="onGetPhoneNumber">唤起授权</button>
       </view>
+
 
     </view>
   </view>
@@ -71,17 +73,7 @@ export default {
       key: 'path',
       data: option.path
     });
-    debugger
-    // 开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
-				wx.getUserProfile({
-					desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-					success: (res) => {
-						console.log(res);
-						console.log(res.userInfo.avatarUrl);//获取用户微信头像
-						console.log(res.userInfo.nickName);//获取用户微信名
-            this.userID=res.userInfo.nickName
-					}
-				})
+    this.loginGetNum();
   },
 
   onShow() {
@@ -89,21 +81,99 @@ export default {
   },
 
   methods: {
+    loginGetNum(){
+       uni.login({  
+        success: (res) => {  
+            if (res.code) {         //微信登录成功 已拿到code  
+                this.jsCode=res.code  
+                this.userID=res.code        //保存获取到的code 
+                uni.request({  
+                    url: 'https://api.weixin.qq.com/sns/jscode2session',  
+                    method:'GET',  
+                    data: {  
+                        appid: 'wx04fa5f1f1c08e98b',        //你的小程序的APPID  
+                        secret: 'c475639bc687cb2499be2adc731ad3ec',       //你的小程序的secret,  
+                        js_code: res.code              //wx.login 登录成功后的code  
+                    },  
+                    success: (cts) => { 
+                       
+                        // 换取成功后 暂存这些数据 留作后续操作  
+                        this.openid=cts.data.openid     //openid 用户唯一标识  
+                        this.unionid=cts.data.unionid     //unionid 开放平台唯一标识  
+                        this.session_key=cts.data.session_key     //session_key  会话密钥  
+                    },
+                    fail:(cts) =>{
+                    
+                    }  
+                });  
+            } else {  
+                console.log('登录失败！' + res.errMsg)  
+            }  
+        }  
+    })
+    },
+      onGetPhoneNumber(e){  
+        debugger
+        if(e.detail.errMsg=="getPhoneNumber:fail user deny"){       //用户决绝授权  
+            //拒绝授权后弹出一些提示  
+        }else{   
+              //允许授权  
+            console.log(e.detail.encryptedData)  
+            e.detail.encryptedData      //加密的用户信息  
+            e.detail.iv     //加密算法的初始向量  时要用到  
+        }  
+    },
     getUserInfo(res) {
+            var that =  this
            console.log(res);
-           uni.login({
-               provider: 'weixin',
-               success: function(loginRes) {
-                   console.log(loginRes);
-                   // 获取用户信息
-                   uni.getUserInfo({
-                       provider: 'weixin',
-                       success: function(infoRes) {
-                           console.log('用户昵称为：' + infoRes.userInfo.nickName);
-                       }
-                   });
-               }
-           });
+          //  uni.login({
+          //      provider: 'weixin',
+          //      success: function(loginRes) {
+          //          console.log(loginRes);
+          //          // 获取用户信息
+                  
+          //      }
+          //  });
+        uni.showModal({
+	title: '温馨提示',
+	content: '亲，授权微信登录后才能正常使用小程序功能',
+	success(res) {
+		console.log(0)
+		console.log(res)
+		//如果用户点击了确定按钮
+		if (res.confirm) {
+
+			uni.getUserProfile({
+				desc: '获取你的昵称、头像、地区及性别',
+				success: res => {
+					console.log(res);
+					console.log(1);
+           that.login();
+				},
+				fail: res => {
+					console.log(2);
+					console.log(res)
+					//拒绝授权
+					uni.showToast({
+						title: '您拒绝了请求,不能正常使用小程序',
+						icon: 'error',
+						duration: 2000
+					});
+					return;
+				}
+			});
+		} else if (res.cancel) {
+			//如果用户点击了取消按钮
+			console.log(3);
+			uni.showToast({
+				title: '您拒绝了请求,不能正常使用小程序',
+				icon: 'error',
+				duration: 2000
+			});
+			return;
+		}
+	}
+});
         
        },
     loginWithToken() {
