@@ -64,6 +64,26 @@ export default {
     }
   },
   methods: {
+    	  setData(obj){    
+	  let that = this;    
+	  let keys = [];    
+	  let val,data;    
+	  Object.keys(obj).forEach(function(key){    
+	   keys = key.split('.');    
+	   val = obj[key];    
+	   data = that.$data;    
+	   keys.forEach(function(key2,index){    
+	       if(index+1 == keys.length){    
+	           that.$set(data,key2,val);    
+	       }else{    
+	           if(!data[key2]){    
+	              that.$set(data,key2,{});    
+	           }    
+	       }    
+	       data = data[key2];    
+	   })    
+	  });    
+	  }  ,
     parseCustom(message) {
       // 约定自定义消息的 data 字段作为区分，不解析的不进行展示
       if (message.payload.data === 'order') {

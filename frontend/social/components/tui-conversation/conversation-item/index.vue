@@ -62,6 +62,26 @@ export default {
   },
 
   methods: {
+    	  setData(obj){    
+	  let that = this;    
+	  let keys = [];    
+	  let val,data;    
+	  Object.keys(obj).forEach(function(key){    
+	   keys = key.split('.');    
+	   val = obj[key];    
+	   data = that.$data;    
+	   keys.forEach(function(key2,index){    
+	       if(index+1 == keys.length){    
+	           that.$set(data,key2,val);    
+	       }else{    
+	           if(!data[key2]){    
+	              that.$set(data,key2,{});    
+	           }    
+	       }    
+	       data = data[key2];    
+	   })    
+	  });    
+	  }  ,
     // 先查 remark；无 remark 查 (c2c)nick/(group)name；最后查 (c2c)userID/(group)groupID
     getConversationName(conversation) {
       if (conversation.type === '@TIM#SYSTEM') {
