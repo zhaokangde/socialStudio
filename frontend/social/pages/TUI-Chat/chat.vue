@@ -59,6 +59,7 @@ export default {
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+	  debugger
     // conversationID: C2C、 GROUP
     logger.log(` TUI-chat | onLoad | conversationID: ${options.conversationID}`);
     const {
