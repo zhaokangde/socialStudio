@@ -4,12 +4,86 @@
 .contain {
   width: 100%;
   height: 100%;
-  background: #006EFF
+  background: #cc5478
 }
 
 .view {
-  height: 358rpx;
-  background: #006EFF;
+  height: 380rpx;
+  background: #cc5478;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.image-radius {
+  width: 100%;
+  height:  100%;
+ }
+
+ .view-item {
+  width: 100%;
+  height:  120rpx;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.view-item-image {
+  width: 160upx;
+  height: 160upx;
+  background: #fff;
+  border: 5upx solid #fff;
+  border-radius: 50%;
+  margin-top: 0upx;
+  margin-left: 30upx;
+  overflow: hidden;
+}
+
+.view-user{
+  width:187upx;
+  height: 120upx;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.view-icon{
+  width:60upx;
+  height: 60upx;
+  position:absolute;left:30%;top:20%;
+  }
+
+  .view-icon-text{
+    width:80upx;
+    height: 60upx;
+    position:absolute;left:32%;top:68%;
+    color: rgb(77, 71, 71);
+    font-size:28upx
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.view-image-box{
+  height: 179rpx;
+  background: #962525;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -29,13 +103,7 @@
   z-index: 1;
   margin-top: 110px;
 }
-.image-radius {
-  padding-left: 43rpx;
-  padding-top: 43rpx;
-  padding-bottom: 40rpx;
-  height: 120rpx;
-  width: 120rpx;
-}
+
 .name{
   height: 25px;
   font-family: PingFangSC-Medium;

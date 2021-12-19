@@ -29,7 +29,7 @@ export default {
     uni.$TUIKit.on(uni.$TUIKitEvent.SDK_READY, this.onSDKReady);
   },
   globalData: {
-    // userInfo: userID userSig token phone
+    // userInfo: userID userSig UserName userFaceUrl
     userInfo: null,
     // 个人信息
     userProfile: null,

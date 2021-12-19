@@ -29,7 +29,7 @@ export function setTokenStorage(options) {
         userSig: options.userInfo.userSig
       }
     };
-
+    debugger
     if (!app) {
       app = getApp();
     }

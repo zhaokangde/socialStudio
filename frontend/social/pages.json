@@ -1,18 +1,18 @@
 {
 	"pages": [
 		{
+			"path": "pages/TUI-Index/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
 			"path": "pages/TUI-Login/login2",
 			"style": {}
 		},
 		{
 			"path": "pages/TUI-Login/login",
 			"style": {}
-		},
-		{
-			"path": "pages/TUI-Index/index",
-			"style": {
-				"navigationStyle": "custom"
-			}
 		},
 		{
 			"path": "pages/TUI-Conversation/conversation/conversation",
@@ -36,7 +36,7 @@
 			}
 		},
 		{
-			"path": "pages/TUI-User-Center/mine/mine",
+			"path": "pages/TUI-User-Center/mine/mine2",
 			"style": {
 				"navigationStyle": "custom"
 			}
@@ -89,7 +89,7 @@
 				}
 			},
 			{
-				"pagePath": "pages/TUI-User-Center/mine/mine",
+				"pagePath": "pages/TUI-User-Center/mine/mine2",
 				"text": "我的",
 				"iconPath": "/static/static/images/mine-normal.png",
 				"selectedIconPath": "/static/static/images/mine-hover.png"
