@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.JobMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.Job">
+        <id column="job_id" jdbcType="INTEGER" property="jobId" />
+        <result column="job_name" jdbcType="VARCHAR" property="jobName" />
+        <result column="job_type" jdbcType="VARCHAR" property="jobType" />
+        <result column="job_education" jdbcType="VARCHAR" property="jobEducation" />
+        <result column="job_num" jdbcType="INTEGER" property="jobNum" />
+        <result column="job_salary" jdbcType="INTEGER" property="jobSalary" />
+        <result column="job_adress" jdbcType="VARCHAR" property="jobAdress" />
+        <result column="job_experience" jdbcType="VARCHAR" property="jobExperience" />
+        <result column="job_welfare" jdbcType="VARCHAR" property="jobWelfare" />
+        <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+        <association column="company_id" property="company" javaType="com.example.demo.entity.Company" select="com.example.demo.mapper.CompanyMapper.selectByCompanyId"></association>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        job_id, job_name, job_type, job_education, job_num, job_salary, job_adress, job_experience,
+        job_welfare,company_id,company_name
+    </sql>
+
+
+
+    <select id="selectByJobId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from  job
+        where job_id = #{jobId,jdbcType=INTEGER}
+    </select>
+
+
+    <sql id="findPageWithWhere">
+        <where> 1=1
+            <if test="jobId != null" >
+                and job_id = #{jobId,jdbcType=INTEGER},'%')
+            </if>
+            <if test="jobName != null and jobName != ''" >
+                and job_name like concat('%',  #{jobName,jdbcType=VARCHAR}
+            </if>
+            <if test="jobType != null and jobType != ''" >
+                and job_type like concat('%',  #{jobType,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="jobEducation != null and jobEducation != ''" >
+                and job_education like concat('%',  #{jobEducation,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="jobNum != null" >
+                and job_num like concat('%',  #{jobNum,jdbcType=INTEGER},'%')
+            </if>
+            <if test="jobSalary != null" >
+                and job_salary like concat('%', #{jobSalary,jdbcType=INTEGER},'%')
+            </if>
+            <if test="jobAdress != null and jobAdress != ''" >
+                and job_adress like concat('%',#{jobAdress,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="jobExperience != null and jobExperience != ''" >
+                and job_experience like concat('%', #{jobExperience,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="jobWelfare != null and jobWelfare != ''" >
+                and job_welfare like concat('%', #{jobWelfare,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="companyName != null and jobWelfare != ''" >
+                and company_name like '%${companyName}%'
+            </if>
+        </where>
+    </sql>
+
+
+    <select id="findPageWithResult" parameterType="com.example.demo.dto.JobDTO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from  job
+        <include refid="findPageWithWhere" />
+        limit #{start},#{pageSize}
+    </select>
+
+
+    <select id="findPageWithCount" parameterType="com.example.demo.dto.JobDTO" resultType="Integer">
+        select count(1)
+        from job
+        <include refid="findPageWithWhere" />
+    </select>
+
+</mapper>
