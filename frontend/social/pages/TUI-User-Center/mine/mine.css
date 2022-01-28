@@ -8,6 +8,7 @@
 }
 
 .view {
+  width: 100%;
   height: 380rpx;
   background: #cc5478;
   position: relative;
@@ -62,13 +63,101 @@
     font-size:28upx
     }
 
+    .view-user-info-and-edit {
+      margin-top: 25upx;
+      width: 100%;
+      height:  140rpx;
+      position: relative;
+      display: flex;
+      flex-direction: row;
 
+      align-items: left;
+    }
+    .view-user-info-edit {
 
+      width: 15%;
+      height:  40rpx;
+border:1.5px solid;
+border-radius:35px;
+background:#fff;
+position: relative;
+display: flex;
+align-items: center;
+    }
+    .view-user-info {
 
+      width: 80%;
+      height:  140rpx;
+      position: relative;
+      display: flex;
+      flex-direction: column;
 
+      align-items: left;
+    }
 
+    .user-info-name{
+      margin-top: 0upx;
+      margin-left: 30upx;
+      color: rgb(8, 8, 8);
+      font-size:32upx
+      }
+      .user-info-sign-name{
+        margin-top: 5upx;
+        margin-left: 30upx;
+        color: rgb(77, 71, 71);
+        font-size:26upx
+        }
 
+        .view-user-lable{
+          width:100%;
+          height: 50upx;
+          position: relative;
+          display: flex;
+          background: #fff;
+          flex-direction: row;
+          align-items: left;
+        }
 
+.view-user-lable-item{
+  width:140upx;
+  height: 50upx;
+  position: relative;
+  display: flex;
+  background: #fff;
+  flex-direction: row;
+  align-items: left;
+}
+
+.view-lable{
+  margin-top: 10upx;
+  margin-left: 30upx;
+  width:30upx;
+  height: 30upx;
+  }
+
+  .view-lable-text{
+    margin-top: 10upx;
+    margin-left: 8upx;
+    color: rgb(8, 8, 8);
+    font-size:22upx
+    }
+
+    .view-user-game {
+      margin-top: 80upx;
+      width: 100%;
+      height:  70rpx;
+      position: relative;
+      display: flex;
+      flex-direction: row;
+    
+      align-items: left;
+    }
+
+    .view-user-game-title {
+      margin-left: 25upx;
+      color: rgb(8, 8, 8);
+      font-size:32upx
+    }
 
 
 
